@@ -1,0 +1,49 @@
+body {
+  background-color: var(--light-theme-bg);
+
+  color: var(--light-theme-text);
+
+  header {
+    background-color: var(--light-theme-nav);
+  }
+}
+
+[class*="theme-dark"] {
+  background-color: var(--dark-theme-bg);
+
+  color: var(--dark-theme-text);
+
+  header {
+    background-color: var(--dark-theme-nav);
+  }
+
+  .countries__card {
+    background-color: var(--dark-theme-nav);
+  }
+
+  .search__div--input {
+    background-color: var(--dark-theme-nav);
+    color: var(--dark-theme-text);
+  }
+  .search__div--select select {
+    background-color: var(--dark-theme-nav);
+    color: var(--dark-theme-text);
+  }
+
+  .country {
+    color: var(--dark-theme-text);
+
+    &__info--border {
+      li {
+        background-color: var(--dark-theme-nav);
+        border: 1px solid hsl(207, 26%, 17%);
+        box-shadow: 0 0 0.25rem hsl(200, 15%, 8%, 0.3);
+      }
+    }
+  }
+  .back__btn {
+    background-color: var(--dark-theme-nav);
+    border: 1px solid hsl(207, 26%, 17%);
+    box-shadow: 0 0 0.25rem hsl(200, 15%, 8%, 0.3);
+  }
+}

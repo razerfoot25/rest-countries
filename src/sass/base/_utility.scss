@@ -1,0 +1,129 @@
+@use "./size" as *;
+@use "./colors" as *;
+@use "../components/media-query" as *;
+
+@each $number, $size in $sizes {
+  .p-#{$number} {
+    padding: $size;
+  }
+  .p-block-#{$number} {
+    padding-block: $size;
+  }
+  .p-inline-#{$number} {
+    padding-inline: $size;
+  }
+  .m-#{$number} {
+    margin: $size;
+  }
+  .m-block-#{$number} {
+    margin-block: $size;
+  }
+  .m-inline-#{$number} {
+    margin-inline: $size;
+  }
+}
+@include mq(medium) {
+  @each $number, $size in $sizes {
+    .p-#{$number}-md {
+      padding: $size;
+    }
+    .p-block-#{$number}-md {
+      padding-block: $size;
+    }
+    .p-inline-#{$number}-md {
+      padding-inline: $size;
+    }
+    .m-#{$number}-md {
+      margin: $size;
+    }
+    .m-block-#{$number}-md {
+      margin-block: $size;
+    }
+    .m-inline-#{$number}-md {
+      margin-inline: $size;
+    }
+  }
+}
+@each $type, $value in $colors {
+  @each $number, $shade in $value {
+    .#{$type}-#{$number} {
+      color: #{$shade};
+    }
+    .bg-#{$type}-#{$number} {
+      background-color: #{$shade};
+    }
+  }
+}
+
+.container {
+  max-width: Min(var(--max-container-width), 100% - var(--gutter) * 2);
+  margin-inline: auto;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns:
+    Minmax(var(--gutter), 1fr)
+    repeat(
+      var(--grid-column),
+      Minmax(0, Calc(var(--max-width) / var(--grid-column)))
+    )
+    Minmax(var(--gutter), 1fr);
+
+  > * {
+    grid-column: 2 / span var(--grid-column);
+  }
+}
+
+.grid-col-2 {
+  grid-column: 2 / span var(--grid-column);
+  display: grid;
+  grid-auto-flow: row;
+  gap: var(--grid-gap);
+  @include mq(medium) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.grid-col-3 {
+  grid-column: 2 / span var(--grid-column);
+  display: grid;
+  grid-auto-flow: row;
+  gap: var(--grid-gap, 1rem);
+  @include mq(large) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.grid-col-4 {
+  grid-column: 2 / span var(--grid-column);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, Minmax(10rem, 1fr));
+  gap: var(--grid-gap, 1rem);
+  @include mq(large) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.grid-col-auto {
+  grid-column: 2 / span var(--grid-column);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, Minmax(20rem, 1fr));
+  gap: var(--grid-gap, 1rem);
+}
+
+.spacer {
+  > * + * {
+    margin-top: 1em;
+  }
+}
+
+.sr-only {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}

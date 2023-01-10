@@ -1,0 +1,50 @@
+@use "./colors" as *;
+@use "./fonts" as *;
+@use "../components/media-query" as *;
+:root {
+  --grid-column: 6;
+  --max-width: 80em;
+  --grid-gap: 1rem;
+  --gutter: 1.5rem;
+
+  --light-theme-bg: hsl(0, 0%, 100%);
+  --dark-theme-bg: hsl(207, 26%, 17%);
+
+  --light-theme-nav: hsl(0, 0%, 98%);
+  --dark-theme-nav: hsl(209, 23%, 22%);
+
+  --light-theme-text: hsl(200, 15%, 8%);
+  --dark-theme-text: hsl(0, 0%, 100%);
+
+  @each $type, $value in $colors {
+    @each $number, $shade in $value {
+      --clr-#{$type}-#{$number}: #{$shade};
+    }
+  }
+
+  @each $type, $value in $font-weight {
+    @each $weight, $number in $value {
+      --fw-#{$type}-#{$weight}: #{$number};
+    }
+  }
+
+  @each $viewpoint, $value in $font-size {
+    @if ($viewpoint == small) {
+      @each $value, $size in $value {
+        --fs-#{$value}: #{$size};
+      }
+    }
+  }
+}
+
+@include mq(medium) {
+  :root {
+    @each $viewpoint, $value in $font-size {
+      @if ($viewpoint != small) {
+        @each $value, $size in $value {
+          --fs-#{$value}: #{$size};
+        }
+      }
+    }
+  }
+}
